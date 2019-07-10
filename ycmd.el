@@ -118,6 +118,9 @@
 (require 'diff)
 (require 'diff-mode)
 
+;; =====
+;; function PKG-INFO-VERSION-INFO taking one argument PACKAGE
+;; is declared in the file pkg-info 
 (declare-function pkg-info-version-info "pkg-info" (package))
 
 (defgroup ycmd nil
@@ -2271,9 +2274,7 @@ The timeout can be set with the variable
   (let* ((column-num (+ 1 (ycmd--column-in-bytes)))
          (line-num (line-number-at-pos (point)))
          (full-path (ycmd--encode-string (or (buffer-file-name) "")))
-         (file-contents (ycmd--encode-string
-                         (buffer-substring-no-properties
-                          (point-min) (point-max))))
+         (file-contents (buffer-substring-no-properties (point-min) (point-max)))
          (file-types (or (ycmd-major-mode-to-file-types major-mode)
                          '("generic"))))
     `(("file_data" .
